@@ -36,11 +36,16 @@ export default {
     border-radius: 0.4rem;
     position: relative;
     cursor: url('/hover.svg'), auto;
+    flex-basis: 31%;
+    flex-shrink: 1;
     &__image {
       margin-bottom: 1.6rem;
+      overflow: hidden;
       &-el {
         object-fit: cover;
+        transition: .5s all;
         width: 100%;
+        max-height: 20rem;
       }
     }
     &__description {
@@ -69,8 +74,37 @@ export default {
     }
     &__btn-remove {
       position: absolute;
+      cursor: url('/hover.svg'), auto;
       top: -.8rem;
       right: -.8rem;
+      @keyframes shaking {
+        0%,
+        100% {
+          transform: translateX(0%);
+          transform-origin: 50% 50%;
+        }
+        15% {
+          transform: translateX(-0.5rem) rotate(6deg);
+        }
+        30% {
+          transform: translateX(0.2rem) rotate(-6deg);
+        }
+        45% {
+          transform: translateX(-0.2rem) rotate(3.6deg);
+        }
+        60% {
+          transform: translateX(0.1rem) rotate(-2.4deg);
+        }
+        75% {
+          transform: translateX(-0.05rem) rotate(1.2deg);
+        }
+      }
+      &:hover {
+        animation: shaking 0.5s ease;
+      }
+    }
+    &:hover &__image-el {
+      transform: scale(1.1);
     }
   }
 
