@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <a href="#" class="open-form">&#43;</a>
+    <a href="#modal-form" class="open-form">&#43;</a>
     <h1 class="header__title">
       Добавление товара
     </h1>
@@ -70,6 +70,7 @@ export default {
       font-size: 2rem;
       line-height: 1rem;
       transition: .5s color, .5s box-shadow;
+      display: none;
       @extend %text-style;
       @extend %block-style;
       &:hover {
@@ -78,6 +79,9 @@ export default {
       }
       &:active {
         background-color:rgb(238, 235, 227);
+      }
+      @media screen and (max-width: 664px) {
+        display: inline-block;
       }
     }
 </style>

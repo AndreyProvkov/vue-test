@@ -1,5 +1,5 @@
 <template>
-  <form class="form-add">
+  <form id="modal-form" class="form-add">
     <label class="form-add__name form-add_required">
       <span class="form-add__name-span">
         Наименование товара
@@ -30,6 +30,7 @@
     <button type="button" disabled class="form-add__btn-add">
       Добавить товар
     </button>
+    <a class='form-add__modal-close' href="#close">&#10006;</a>
   </form>
 </template>
 
@@ -82,11 +83,58 @@ export default {
     }
     .form-add {
         $form: &;
+        float: left;
+        position: sticky;
+        top: 2.4rem;
+        margin-right: 1.6rem;
         background: #FFFEFB;
         box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.04), 0 .6rem 1rem rgba(0, 0, 0, 0.02);
         border-radius: .4rem;
         max-width: 28.4rem;
         padding: 2.4rem;
+        &:target {
+          display: block;
+          float: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 1;
+          @media screen and (min-width: 665px) {
+            float: left;
+            position: sticky;
+            top: 2.4rem;
+            margin-right: 1.6rem;
+          }
+        }
+        @media screen and (max-width: 664px) {
+          display: none;
+          margin-right: 0;
+        }
+        &__modal-close {
+          position: absolute;
+          right: 0.5rem;
+          top: 0.5rem;
+          padding: 0.8rem;
+          text-decoration: none;
+          font-size: 1.5rem;
+          line-height: 1rem;
+          cursor: url('/hover.svg'), auto;
+          background-color: #FFFEFB;
+          color: #B4B4B4;
+          transition: .3s color;
+          display: none;
+          &:hover {
+            color: #3F3F3F;
+          }
+          &:active {
+            color: #000;
+          }
+          @media screen and (max-width: 664px) {
+            display: inline-block;
+          }
+        }
         &__name,
         &__text,
         &__link,
