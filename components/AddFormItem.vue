@@ -16,7 +16,11 @@
       <span class="form-add__text-span">
         Описание товара
       </span>
-      <textarea class="form-add__text-input" placeholder="Введите описание товара" />
+      <textarea
+        class="form-add__text-input"
+        placeholder="Введите описание товара"
+        v-model.trim="inputDescription"
+      />
     </label>
     <label class="form-add__link form-add_required">
       <span class="form-add__link-span">
@@ -73,6 +77,18 @@ export default {
           this.form.name = this.normalizeText(val)
         } else {
           this.form.name = val
+        }
+      }
+    },
+    inputDescription: {
+      get () {
+        return this.form.description
+      },
+      set (val) {
+        if (val) {
+          this.form.description = this.normalizeText(val)
+        } else {
+          this.form.description = val
         }
       }
     }
