@@ -11,7 +11,7 @@
         {{item.description}}
       </p>
       <div class="item__price">
-        {{item.price}} руб.
+        {{item.price | divideNumber}} руб.
       </div>
     </div>
     <button class="btn-remove item__btn-remove">
