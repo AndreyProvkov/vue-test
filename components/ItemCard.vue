@@ -111,16 +111,17 @@ export default {
     }
     &:hover &__btn-remove {
       opacity: 1;
+      top: -.8rem;
+      right: -.8rem;
     }
-  }
-
-  .btn-remove {
-    width: 3.2rem;
-    height: 3.2rem;
-    background: #FF8484;
-    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
-    border-radius: 1rem;
-    border: none;
-    padding: .8rem;
-  }
+    }
+    .btn-remove {
+      width: 3.2rem;
+      height: 3.2rem;
+      background: #FF8484;
+      box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+      border-radius: 1rem;
+      border: none;
+      padding: .8rem;
+    }
 </style>
