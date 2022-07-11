@@ -1,18 +1,17 @@
 <template>
   <div class="item">
     <div class="item__image">
-      <img class="item__image-el" src="/camera.jpg" alt="camera">
+      <img class="item__image-el" :src="item.linkImg" alt="camera">
     </div>
     <div class="item__description">
       <h2 class="item__title">
-        Наименование товара
+        {{item.name}}
       </h2>
       <p class="item__text">
-        Довольно-таки интересное описание товара в несколько строк. Довольно-таки
-        интересное описание товара в несколько строк
+        {{item.description}}
       </p>
       <div class="item__price">
-        10 000 руб.
+        {{item.price}} руб.
       </div>
     </div>
     <button class="btn-remove item__btn-remove">
@@ -23,7 +22,10 @@
 
 <script>
 export default {
-  name: 'ItemList'
+  name: 'ItemList',
+  props: {
+    item: Object
+  }
 }
 </script>
 

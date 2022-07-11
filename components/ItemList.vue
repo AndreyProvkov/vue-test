@@ -1,23 +1,20 @@
 <template>
   <section class="list-item">
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
+    <ItemCard
+      v-for='item in items'
+      :key='item.id'
+      :item="item"
+    />
     <div class="fill-empty-space"></div>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'ItemList'
+  name: 'ItemList',
+  props: {
+    items: Array
+  }
 }
 </script>
 
