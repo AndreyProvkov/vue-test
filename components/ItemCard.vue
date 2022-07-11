@@ -38,6 +38,7 @@ export default {
     cursor: url('/hover.svg'), auto;
     flex-basis: 31%;
     flex-shrink: 1;
+    flex-grow: 1;
     &__image {
       margin-bottom: 1.6rem;
       overflow: hidden;
@@ -77,6 +78,8 @@ export default {
       cursor: url('/hover.svg'), auto;
       top: -.8rem;
       right: -.8rem;
+      transition: .5s all;
+      opacity: 0;
       @keyframes shaking {
         0%,
         100% {
@@ -105,6 +108,9 @@ export default {
     }
     &:hover &__image-el {
       transform: scale(1.1);
+    }
+    &:hover &__btn-remove {
+      opacity: 1;
     }
   }
 
