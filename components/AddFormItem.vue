@@ -1,10 +1,15 @@
 <template>
   <form id="modal-form" class="form-add">
-    <label class="form-add__name form-add_required">
+    <label :class="`form-add__name ${form.name.length === 0 ? 'form-add_required' : ''}`">
       <span class="form-add__name-span">
         Наименование товара
       </span>
-      <input class="form-add__name-input" type="text" placeholder="Введите наименование товара">
+      <input
+        class="form-add__name-input"
+        type="text"
+        placeholder="Введите наименование товара"
+        v-model.trim='inputName'
+      >
       <span class="form-add__alert">Поле является побязательным</span>
     </label>
     <label class="form-add__text">
@@ -36,7 +41,42 @@
 
 <script>
 export default {
-  name: 'AddFormItem'
+  name: 'AddFormItem',
+  data () {
+    return {
+      form: {
+        name: '',
+        description: '',
+        link: '',
+        price: 0
+      }
+    }
+  },
+  methods: {
+    deleteSpaces (str) {
+      return str.replace(/\s+/g, ' ')
+    },
+    firstLetterUppercase (str) {
+      return str[0].toUpperCase() + str.slice(1)
+    },
+    normalizeText (str) {
+      return this.firstLetterUppercase(this.deleteSpaces(str))
+    }
+  },
+  computed: {
+    inputName: {
+      get () {
+        return this.form.name
+      },
+      set (val) {
+        if (val) {
+          this.form.name = this.normalizeText(val)
+        } else {
+          this.form.name = val
+        }
+      }
+    }
+  }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="item">
     <div class="item__image">
-      <img class="item__image-el" :src="item.linkImg" alt="camera">
+      <img class="item__image-el" :src="item.linkImg" alt="image">
     </div>
     <div class="item__description">
       <h2 class="item__title">
@@ -44,6 +44,8 @@ export default {
     &__image {
       margin-bottom: 1.6rem;
       overflow: hidden;
+      border-top-left-radius: .4rem;
+      border-top-right-radius: .4rem;
       &-el {
         object-fit: cover;
         transition: .5s all;
