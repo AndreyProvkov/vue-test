@@ -19,4 +19,13 @@ export default {
     max-width: 137.6rem;
     margin: 0 auto;
   }
+  .form-block {
+    float: left;
+    position: sticky;
+    top: 2.4rem;
+    margin-right: 1.6rem;
+    @media screen and (max-width: 664px) {
+      display: none;
+    }
+  }
 </style>
