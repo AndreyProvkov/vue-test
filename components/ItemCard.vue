@@ -50,6 +50,7 @@ export default {
       border-top-left-radius: .4rem;
       border-top-right-radius: .4rem;
       max-height: 20rem;
+      min-height: 10rem;
       &-el {
         object-fit: cover;
         transition: .5s all;

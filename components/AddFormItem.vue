@@ -198,14 +198,14 @@ export default {
           right: 0;
           bottom: 0;
           z-index: 1;
-          @media screen and (min-width: 665px) {
+          @media screen and (min-width: 670px) {
             float: left;
             position: sticky;
             top: 2.4rem;
             margin-right: 1.6rem;
           }
         }
-        @media screen and (max-width: 664px) {
+        @media screen and (max-width: 669px) {
           display: none;
           margin-right: 0;
         }
@@ -228,7 +228,7 @@ export default {
           &:active {
             color: #000;
           }
-          @media screen and (max-width: 664px) {
+          @media screen and (max-width: 669px) {
             display: inline-block;
           }
         }

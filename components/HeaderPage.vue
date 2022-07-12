@@ -80,7 +80,7 @@ export default {
       &:active {
         background-color:rgb(238, 235, 227);
       }
-      @media screen and (max-width: 664px) {
+      @media screen and (max-width: 669px) {
         display: inline-block;
       }
     }
