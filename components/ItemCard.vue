@@ -41,11 +41,15 @@ export default {
     flex-basis: 31%;
     flex-shrink: 1;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
     &__image {
       margin-bottom: 1.6rem;
       overflow: hidden;
       border-top-left-radius: .4rem;
       border-top-right-radius: .4rem;
+      max-height: 20rem;
       &-el {
         object-fit: cover;
         transition: .5s all;
@@ -55,12 +59,19 @@ export default {
     }
     &__description {
       padding: 0 1.6rem 2.4rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     &__title {
       font-weight: 600;
       font-size: 2rem;
       line-height: 2.5rem;
       margin: 0;
+      @media screen and (max-width: 970px) {
+        font-size: 1.7rem;
+      }
     }
     &__text {
       font-weight: 400;
@@ -71,11 +82,20 @@ export default {
       -webkit-box-orient: vertical;
       overflow: hidden;
       max-height: 15rem;
+      @media screen and (max-width: 970px) {
+        font-size: 1.4rem;
+      }
     }
     &__price {
       font-weight: 600;
       font-size: 2.4rem;
       line-height: 3rem;
+      @media screen and (max-width: 1060px) {
+        font-size: 2rem;
+      }
+      @media screen and (max-width: 970px) {
+        font-size: 1.6rem;
+      }
     }
     &__btn-remove {
       position: absolute;
