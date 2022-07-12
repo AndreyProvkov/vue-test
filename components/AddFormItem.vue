@@ -43,7 +43,7 @@
       <input class="form-add__price-input" type="text" placeholder="Введите цену" v-model="form.price" @input="checkPrice">
       <span class="form-add__alert">Поле является обязательным</span>
     </label>
-    <button type="button" disabled class="form-add__btn-add">
+    <button type="button" :disabled="activateButton" class="form-add__btn-add">
       Добавить товар
     </button>
     <a class='form-add__modal-close' href="#close">&#10006;</a>
@@ -61,7 +61,8 @@ export default {
         link: '',
         price: ''
       },
-      errorLink: ''
+      errorLink: '',
+      activeBtn: false
     }
   },
   methods: {
@@ -119,6 +120,12 @@ export default {
           this.form.description = val
         }
       }
+    },
+    activateButton () {
+      if (this.errorLink.length === 0 && this.form.name.length !== 0 && this.form.price.length !== 0) {
+        return false
+      }
+      return true
     }
   }
 }
