@@ -10,7 +10,7 @@
         placeholder="Введите наименование товара"
         v-model.trim='inputName'
       >
-      <span class="form-add__alert">Поле является побязательным</span>
+      <span class="form-add__alert">Поле является обязательным</span>
     </label>
     <label class="form-add__text">
       <span class="form-add__text-span">
@@ -36,12 +36,12 @@
       >
       <span class="form-add__alert">{{ errorLink }}</span>
     </label>
-    <label class="form-add__price form-add_required">
+    <label :class="`form-add__price ${form.price.length === 0 ? 'form-add_required' : ''}`">
       <span class="form-add__price-span">
         Цена товара
       </span>
-      <input class="form-add__price-input" type="text" placeholder="Введите цену">
-      <span class="form-add__alert">Поле является побязательным</span>
+      <input class="form-add__price-input" type="text" placeholder="Введите цену" v-model="form.price" @input="checkPrice">
+      <span class="form-add__alert">Поле является обязательным</span>
     </label>
     <button type="button" disabled class="form-add__btn-add">
       Добавить товар
@@ -59,7 +59,7 @@ export default {
         name: '',
         description: '',
         link: '',
-        price: 0
+        price: ''
       },
       errorLink: ''
     }
@@ -77,7 +77,7 @@ export default {
     checkLink () {
       const regexp = /^(http(s)?:\/\/)/
       if (this.form.link.length === 0) {
-        this.errorLink = 'Поле является побязательным'
+        this.errorLink = 'Поле является обязательным'
         return
       }
       if (!regexp.test(this.form.link)) {
@@ -89,6 +89,10 @@ export default {
         return
       }
       this.errorLink = ''
+    },
+    checkPrice () {
+      const price = this.form.price
+      this.form.price = Number(price.replace(/\D/g, '')).toLocaleString('ru-RU')
     }
   },
   computed: {
