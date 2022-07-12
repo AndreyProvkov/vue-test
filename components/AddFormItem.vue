@@ -125,7 +125,14 @@ export default {
     onAddItem () {
       if (!this.activateButton()) {
         this.$emit('addItem', this.form)
+        this.clearForm()
       }
+    },
+    clearForm () {
+      this.form.name = ''
+      this.form.description = ''
+      this.form.link = ''
+      this.form.price = ''
     },
     activateButton () {
       if (this.errorLink.length === 0 && this.form.name.length !== 0 && this.form.price.length !== 0) {
