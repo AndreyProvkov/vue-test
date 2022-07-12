@@ -39,13 +39,17 @@ export default {
     height: 0;
     flex-basis: 31%;
   }
+  .list-move,
   .list-enter-active,
   .list-leave-active {
-    transition: all 1s ease;
+    transition: all .5s ease;
   }
   .list-enter,
   .list-leave-to {
     opacity: 0;
     transform: scale(0);
+  }
+  .list-leave-active {
+    position: absolute;
   }
 </style>
