@@ -37,7 +37,19 @@ export default {
   }
   .fill-empty-space {
     height: 0;
-    flex-basis: 31%;
+    flex-basis: 32%;
+    @media screen and (max-width: 1068px) {
+      flex-basis: 31%;
+    }
+    @media screen and (max-width: 899px) {
+      flex-basis: 48%;
+    }
+    @media screen and (max-width: 669px) {
+      flex-basis: 31%;
+    }
+    @media screen and (max-width: 534px) {
+      flex-basis: 48%;
+    }
   }
   .list-move,
   .list-enter-active,
