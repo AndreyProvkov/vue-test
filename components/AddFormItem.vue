@@ -1,5 +1,10 @@
 <template>
   <form id="modal-form" class="form-add" @submit.prevent="onAddItem">
+    <transition name="translate-y">
+      <div v-if="successAdd" class="form-add__success">
+        Товар добавлен
+      </div>
+    </transition>
     <label :class="`form-add__name ${form.name.length === 0 ? 'form-add_required' : ''}`">
       <span class="form-add__name-span">
         Наименование товара
@@ -63,7 +68,8 @@ export default {
         price: ''
       },
       errorLink: '',
-      activeBtn: false
+      activeBtn: false,
+      successAdd: false
     }
   },
   computed: {
@@ -125,7 +131,9 @@ export default {
     onAddItem () {
       if (!this.activateButton()) {
         this.$emit('addItem', this.form)
+        this.successAdd = true
         this.clearForm()
+        setTimeout(() => { this.successAdd = false }, 2000)
       }
     },
     clearForm () {
@@ -196,6 +204,7 @@ export default {
         border-radius: .4rem;
         max-width: 28.4rem;
         padding: 2.4rem;
+        overflow: hidden;
         &:target {
           display: block;
           float: none;
@@ -238,6 +247,18 @@ export default {
           @media screen and (max-width: 669px) {
             display: inline-block;
           }
+        }
+        &__success {
+          position: absolute;
+          top: 0;
+          right: 7rem;
+          border: .1rem solid green;
+          border-top: none;
+          padding: .5rem;
+          color: green;
+          border-radius: 0 0 .5rem .5rem;
+          text-transform: uppercase;
+          z-index: 2;
         }
         &__name,
         &__text,
@@ -316,6 +337,15 @@ export default {
               }
             }
           }
+        }
+        .translate-y-enter-active,
+        .translate-y-leave-active {
+          transition: all .4s;
+        }
+        .translate-y-enter,
+        .translate-y-leave-to {
+          transform: translateY(-2.5rem);
+          opacity: 0;
         }
 }
 </style>
