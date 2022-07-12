@@ -1,5 +1,5 @@
 <template>
-  <form id="modal-form" class="form-add">
+  <form id="modal-form" class="form-add" @submit.prevent="onAddItem">
     <label :class="`form-add__name ${form.name.length === 0 ? 'form-add_required' : ''}`">
       <span class="form-add__name-span">
         Наименование товара
@@ -53,6 +53,7 @@
 <script>
 export default {
   name: 'AddFormItem',
+  emits: ['addItem'],
   data () {
     return {
       form: {
@@ -94,6 +95,12 @@ export default {
     checkPrice () {
       const price = this.form.price
       this.form.price = Number(price.replace(/\D/g, '')).toLocaleString('ru-RU')
+    },
+    onAddItem () {
+      if (!this.activateButton()) {
+        this.$emit('addItem', this.form)
+      }
+    },
     activateButton () {
       if (this.errorLink.length === 0 && this.form.name.length !== 0 && this.form.price.length !== 0) {
         return false

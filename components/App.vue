@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <HeaderPage />
-    <AddFormItem />
+    <AddFormItem @addItem='add' />
     <ItemList :items='items' />
   </div>
 </template>
@@ -83,6 +83,18 @@ export default {
           price: 10000
         }
       ]
+    }
+  },
+  methods: {
+    add (obj) {
+      const item = {
+        id: new Date().getTime(),
+        name: obj.name,
+        description: obj.description,
+        linkImg: obj.link,
+        price: Number(obj.price.replace(/\s/g, ''))
+      }
+      this.items.unshift(item)
     }
   }
 }
