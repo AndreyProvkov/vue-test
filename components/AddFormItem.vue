@@ -22,12 +22,19 @@
         v-model.trim="inputDescription"
       />
     </label>
-    <label class="form-add__link form-add_required">
+    <label :class="`form-add__link ${errorLink.length !== 0 ? 'form-add_required' : ''}`">
       <span class="form-add__link-span">
         Ссылка на изображение товара
       </span>
-      <input class="form-add__link-input" type="text" placeholder="Введите ссылку">
-      <span class="form-add__alert">Поле является побязательным</span>
+      <input
+        class="form-add__link-input"
+        type="text"
+        placeholder="Введите ссылку"
+        v-model.trim="form.link"
+        @input="checkLink"
+        @focus="checkLink"
+      >
+      <span class="form-add__alert">{{ errorLink }}</span>
     </label>
     <label class="form-add__price form-add_required">
       <span class="form-add__price-span">
@@ -53,7 +60,8 @@ export default {
         description: '',
         link: '',
         price: 0
-      }
+      },
+      errorLink: ''
     }
   },
   methods: {
@@ -65,6 +73,22 @@ export default {
     },
     normalizeText (str) {
       return this.firstLetterUppercase(this.deleteSpaces(str))
+    },
+    checkLink () {
+      const regexp = /^(http(s)?:\/\/)/
+      if (this.form.link.length === 0) {
+        this.errorLink = 'Поле является побязательным'
+        return
+      }
+      if (!regexp.test(this.form.link)) {
+        this.errorLink = 'Ссылка должна начинаться с http:// или https://'
+        return
+      }
+      if (this.form.link.includes(' ')) {
+        this.errorLink = 'В ссылке не должно быть пробелов'
+        return
+      }
+      this.errorLink = ''
     }
   },
   computed: {
