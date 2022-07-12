@@ -5,13 +5,13 @@
     </div>
     <div class="item__description">
       <h2 class="item__title">
-        {{item.name}}
+        {{ item.name }}
       </h2>
       <p class="item__text">
-        {{item.description}}
+        {{ item.description }}
       </p>
       <div class="item__price">
-        {{item.price | divideNumber}} руб.
+        {{ item.price | divideNumber }} руб.
       </div>
     </div>
     <button class="btn-remove item__btn-remove">

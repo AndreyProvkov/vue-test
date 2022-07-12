@@ -5,10 +5,10 @@
         Наименование товара
       </span>
       <input
+        v-model.trim="inputName"
         class="form-add__name-input"
         type="text"
         placeholder="Введите наименование товара"
-        v-model.trim='inputName'
       >
       <span class="form-add__alert">Поле является обязательным</span>
     </label>
@@ -17,9 +17,9 @@
         Описание товара
       </span>
       <textarea
+        v-model.trim="inputDescription"
         class="form-add__text-input"
         placeholder="Введите описание товара"
-        v-model.trim="inputDescription"
       />
     </label>
     <label :class="`form-add__link ${errorLink.length !== 0 ? 'form-add_required' : ''}`">
@@ -27,10 +27,10 @@
         Ссылка на изображение товара
       </span>
       <input
+        v-model.trim="form.link"
         class="form-add__link-input"
         type="text"
         placeholder="Введите ссылку"
-        v-model.trim="form.link"
         @input="checkLink"
         @focus="checkLink"
       >
@@ -40,13 +40,13 @@
       <span class="form-add__price-span">
         Цена товара
       </span>
-      <input class="form-add__price-input" type="text" placeholder="Введите цену" v-model="form.price" @input="checkPrice">
+      <input v-model="form.price" class="form-add__price-input" type="text" placeholder="Введите цену" @input="checkPrice">
       <span class="form-add__alert">Поле является обязательным</span>
     </label>
     <button type="submit" :disabled="activateButton()" class="form-add__btn-add">
       Добавить товар
     </button>
-    <a class='form-add__modal-close' href="#close">&#10006;</a>
+    <a class="form-add__modal-close" href="#close">&#10006;</a>
   </form>
 </template>
 
@@ -64,6 +64,32 @@ export default {
       },
       errorLink: '',
       activeBtn: false
+    }
+  },
+  computed: {
+    inputName: {
+      get () {
+        return this.form.name
+      },
+      set (val) {
+        if (val) {
+          this.form.name = this.normalizeText(val)
+        } else {
+          this.form.name = val
+        }
+      }
+    },
+    inputDescription: {
+      get () {
+        return this.form.description
+      },
+      set (val) {
+        if (val) {
+          this.form.description = this.normalizeText(val)
+        } else {
+          this.form.description = val
+        }
+      }
     }
   },
   methods: {
@@ -106,32 +132,6 @@ export default {
         return false
       }
       return true
-    }
-  },
-  computed: {
-    inputName: {
-      get () {
-        return this.form.name
-      },
-      set (val) {
-        if (val) {
-          this.form.name = this.normalizeText(val)
-        } else {
-          this.form.name = val
-        }
-      }
-    },
-    inputDescription: {
-      get () {
-        return this.form.description
-      },
-      set (val) {
-        if (val) {
-          this.form.description = this.normalizeText(val)
-        } else {
-          this.form.description = val
-        }
-      }
     }
   }
 }

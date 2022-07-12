@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <HeaderPage />
-    <AddFormItem @addItem='add' />
-    <ItemList :items='items' />
+    <AddFormItem @addItem="add" />
+    <ItemList :items="items" />
   </div>
 </template>
 
