@@ -1,11 +1,14 @@
 <template>
-  <section class="list-item">
-    <ItemCard
-      v-for='item in items'
-      :key='item.id'
-      :item="item"
-    />
-    <div class="fill-empty-space"></div>
+  <section>
+    <transition-group class="list-item" name="list" tag="div">
+      <ItemCard
+        v-for="item in items"
+        :key="item.id"
+        :item="item"
+      />
+      <div :key="empty-space" class="fill-empty-space" />
+      <div :key="empty-space1" class="fill-empty-space" />
+    </transition-group>
   </section>
 </template>
 
@@ -29,5 +32,14 @@ export default {
   .fill-empty-space {
     height: 0;
     flex-basis: 31%;
+  }
+  .list-enter-active,
+  .list-leave-active {
+    transition: all 1s ease;
+  }
+  .list-enter,
+  .list-leave-to {
+    opacity: 0;
+    transform: scale(0);
   }
 </style>
