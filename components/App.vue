@@ -2,7 +2,10 @@
   <div class="container">
     <HeaderPage />
     <AddFormItem @addItem="add" />
-    <ItemList :items="items" />
+    <ItemList v-show="items.length" :items="items" @deleteItem="deleteItem($event)" />
+    <transition name="no-items" tag="span">
+      <span v-show="!items.length" class="no-items">Товаров нет</span>
+    </transition>
   </div>
 </template>
 
@@ -95,6 +98,9 @@ export default {
         price: Number(obj.price.replace(/\s/g, ''))
       }
       this.items.unshift(item)
+    },
+    deleteItem (id) {
+      this.items = this.items.filter(item => item.id !== id)
     }
   }
 }
@@ -106,5 +112,19 @@ export default {
     padding-bottom: 0;
     max-width: 137.6rem;
     margin: 0 auto;
+  }
+  .no-items {
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    color: #3F3F3F;
+  }
+  .no-items-enter-active,
+  .no-item-leave-active {
+    transition: opacity 0.5s ease;
+  }
+  .no-items-enter,
+  .no-items-leave {
+    opacity: 0;
   }
 </style>

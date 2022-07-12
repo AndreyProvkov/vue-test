@@ -5,9 +5,10 @@
         v-for="item in items"
         :key="item.id"
         :item="item"
+        @deleteItem="deleteItem($event)"
       />
-      <div :key="empty-space" class="fill-empty-space" />
-      <div :key="empty-space1" class="fill-empty-space" />
+      <div :key="'empty-space'" class="fill-empty-space" />
+      <div :key="'empty-space1'" class="fill-empty-space" />
     </transition-group>
   </section>
 </template>
@@ -17,6 +18,11 @@ export default {
   name: 'ItemList',
   props: {
     items: Array
+  },
+  methods: {
+    deleteItem (id) {
+      this.$emit('deleteItem', id)
+    }
   }
 }
 </script>

@@ -14,7 +14,7 @@
         {{ item.price | divideNumber }} руб.
       </div>
     </div>
-    <button class="btn-remove item__btn-remove">
+    <button class="btn-remove item__btn-remove" @click="deleteItem(item.id)">
       <BtnRemove />
     </button>
   </div>
@@ -25,6 +25,12 @@ export default {
   name: 'ItemList',
   props: {
     item: Object
+  },
+  emits: ['deleteItem'],
+  methods: {
+    deleteItem (id) {
+      this.$emit('deleteItem', id)
+    }
   }
 }
 </script>
