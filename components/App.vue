@@ -14,79 +14,26 @@ export default {
   name: 'App',
   data () {
     return {
-      items: [
-        {
-          id: 0,
-          name: 'Наименование товара',
-          description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          linkImg: '/camera.jpg',
-          price: 10000
-        },
-        {
-          id: 1,
-          name: 'Наименование товара',
-          description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          linkImg: '/camera.jpg',
-          price: 10000
-        },
-        {
-          id: 2,
-          name: 'Наименование товара',
-          description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          linkImg: '/camera.jpg',
-          price: 10000
-        },
-        {
-          id: 3,
-          name: 'Наименование товара',
-          description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          linkImg: '/camera.jpg',
-          price: 10000
-        },
-        {
-          id: 4,
-          name: 'Наименование товара',
-          description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          linkImg: '/camera.jpg',
-          price: 10000
-        },
-        {
-          id: 5,
-          name: 'Наименование товара',
-          description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          linkImg: '/camera.jpg',
-          price: 10000
-        },
-        {
-          id: 6,
-          name: 'Наименование товара',
-          description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          linkImg: '/camera.jpg',
-          price: 10000
-        },
-        {
-          id: 7,
-          name: 'Наименование товара',
-          description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          linkImg: '/camera.jpg',
-          price: 10000
-        },
-        {
-          id: 8,
-          name: 'Наименование товара',
-          description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          linkImg: '/camera.jpg',
-          price: 10000
-        },
-        {
-          id: 9,
-          name: 'Наименование товара',
-          description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-          linkImg: '/camera.jpg',
-          price: 10000
-        }
-      ]
+      items: []
     }
+  },
+  created () {
+    if (!sessionStorage.getItem('listItems')) {
+      const newArr = []
+      for (let i = 0; i < 9; i++) {
+        newArr.push(
+          {
+            id: i,
+            name: 'Наименование товара',
+            description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
+            linkImg: '/camera.jpg',
+            price: 10000 + i
+          }
+        )
+      }
+      sessionStorage.setItem('listItems', JSON.stringify(newArr))
+    }
+    this.items = JSON.parse(sessionStorage.getItem('listItems'))
   },
   methods: {
     add (obj) {
@@ -97,10 +44,16 @@ export default {
         linkImg: obj.link,
         price: Number(obj.price.replace(/\s/g, ''))
       }
-      this.items.unshift(item)
+      const sessionArr = JSON.parse(sessionStorage.getItem('listItems'))
+      sessionArr.unshift(item)
+      this.items = sessionArr
+      sessionStorage.setItem('listItems', JSON.stringify(sessionArr))
     },
     deleteItem (id) {
-      this.items = this.items.filter(item => item.id !== id)
+      let sessionArr = JSON.parse(sessionStorage.getItem('listItems'))
+      sessionArr = sessionArr.filter(item => item.id !== id)
+      this.items = sessionArr
+      sessionStorage.setItem('listItems', JSON.stringify(sessionArr))
     }
   }
 }
