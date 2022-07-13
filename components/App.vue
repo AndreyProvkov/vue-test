@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <ListLoader />
     <HeaderPage @sort="sort($event)" />
     <AddFormItem @addItem="add" />
     <ItemList v-show="items.length" :items="items" @deleteItem="deleteItem($event)" />
@@ -32,7 +33,7 @@ export default {
             id: i,
             name: 'Наименование товара',
             description: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-            linkImg: '/camera.jpg',
+            linkImg: 'https://picsum.photos/200/300',
             price: 10000 + i
           }
         )
