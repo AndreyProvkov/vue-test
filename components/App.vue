@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <HeaderPage />
+    <HeaderPage @sort="sort($event)" />
     <AddFormItem @addItem="add" />
     <ItemList v-show="items.length" :items="items" @deleteItem="deleteItem($event)" />
     <transition name="no-items" tag="span">
@@ -14,7 +14,8 @@ export default {
   name: 'App',
   data () {
     return {
-      items: []
+      items: [],
+      selected: 'default'
     }
   },
   watch: {
@@ -50,9 +51,43 @@ export default {
         price: Number(obj.price.replace(/\s/g, ''))
       }
       this.items.unshift(item)
+      this.sort(this.selected)
     },
     deleteItem (id) {
       this.items = this.items.filter(item => item.id !== id)
+    },
+    sort (selected) {
+      this.selected = selected
+      if (selected === 'name') {
+        this.sortName(this.items)
+      }
+      if (selected === 'min') {
+        this.sortMin(this.items)
+      }
+      if (selected === 'max') {
+        this.sortMax(this.items)
+      }
+    },
+    sortMin (arr) {
+      return arr.sort((obj1, obj2) => {
+        if (obj1.price > obj2.price) { return 1 }
+        if (obj1.price < obj2.price) { return -1 }
+        return 0
+      })
+    },
+    sortMax (arr) {
+      return arr.sort((obj1, obj2) => {
+        if (obj1.price > obj2.price) { return -1 }
+        if (obj1.price < obj2.price) { return 1 }
+        return 0
+      })
+    },
+    sortName (arr) {
+      return arr.sort((obj1, obj2) => {
+        if (obj1.name > obj2.name) { return 1 }
+        if (obj1.name < obj2.name) { return -1 }
+        return 0
+      })
     }
   }
 }
