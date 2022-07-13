@@ -55,7 +55,7 @@ export default {
           line-height: 3.5rem;
           color: #3F3F3F;
           margin: 0;
-          @media screen and (max-width: 664px) {
+          @media screen and (max-width: 669px) {
             display: none;
         }
       }
