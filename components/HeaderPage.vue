@@ -4,15 +4,9 @@
     <h1 class="header__title">
       Добавление товара
     </h1>
-    <select class="sort-select">
-      <option value="name" selected>
-        По наименованию
-      </option>
-      <option value="min">
-        Сначала дешёвые
-      </option>
-      <option value="max">
-        Сначала дорогие
+    <select v-model="selected" class="sort-select" @change="onSort">
+      <option v-for="option in options" :key="option.value" :value="option.value">
+        {{ option.text }}
       </option>
     </select>
   </header>
@@ -20,7 +14,23 @@
 
 <script>
 export default {
-  name: 'HeaderPage'
+  name: 'HeaderPage',
+  data () {
+    return {
+      selected: 'default',
+      options: [
+        { text: 'По умолчанию', value: 'default' },
+        { text: 'По наименованию', value: 'name' },
+        { text: 'Сначала дешёвые', value: 'min' },
+        { text: 'Сначала дорогие', value: 'max' }
+      ]
+    }
+  },
+  methods: {
+    onSort () {
+      this.$emit('sort', this.selected)
+    }
+  }
 }
 </script>
 

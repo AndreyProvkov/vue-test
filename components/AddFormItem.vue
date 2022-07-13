@@ -252,10 +252,11 @@ export default {
           position: absolute;
           top: 0;
           right: 7rem;
-          border: .1rem solid green;
+          border: .1rem solid #3F3F3F;
+          background-color: green;
           border-top: none;
           padding: .5rem;
-          color: green;
+          color: #FFFEFB;
           border-radius: 0 0 .5rem .5rem;
           text-transform: uppercase;
           z-index: 2;

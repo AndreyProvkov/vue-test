@@ -1,7 +1,7 @@
 <template>
   <div class="item">
     <div class="item__image">
-      <img class="item__image-el" :src="item.linkImg" alt="image">
+      <img v-lazyload class="item__image-el" :data-src="item.linkImg" alt="image">
     </div>
     <div class="item__description">
       <h2 class="item__title">
@@ -14,7 +14,7 @@
         {{ item.price | divideNumber }} руб.
       </div>
     </div>
-    <button class="btn-remove item__btn-remove">
+    <button class="btn-remove item__btn-remove" @click="deleteItem(item.id)">
       <BtnRemove />
     </button>
   </div>
@@ -23,8 +23,45 @@
 <script>
 export default {
   name: 'ItemList',
+  directives: {
+    lazyload: {
+      inserted: (el) => {
+        function loadImage () {
+          el.src = el.dataset.src
+        }
+        function callback (entries, observer) {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              loadImage()
+              observer.unobserve(el)
+            }
+          })
+        }
+        function createIntersectionObserver () {
+          const options = {
+            root: null,
+            threshold: 0.25
+          }
+          const observer = new IntersectionObserver(callback, options)
+          observer.observe(el)
+        }
+
+        if (!window.IntersectionObserver) {
+          loadImage()
+        } else {
+          createIntersectionObserver()
+        }
+      }
+    }
+  },
   props: {
     item: Object
+  },
+  emits: ['deleteItem'],
+  methods: {
+    deleteItem (id) {
+      this.$emit('deleteItem', id)
+    }
   }
 }
 </script>
