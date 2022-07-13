@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <ListLoader />
+    <ListLoader v-if="!isLoaded" />
     <HeaderPage @sort="sort($event)" />
     <AddFormItem @addItem="add" />
     <ItemList v-show="items.length" :items="items" @deleteItem="deleteItem($event)" />
@@ -16,7 +16,8 @@ export default {
   data () {
     return {
       items: [],
-      selected: 'default'
+      selected: 'default',
+      isLoaded: false
     }
   },
   watch: {
@@ -41,6 +42,13 @@ export default {
       sessionStorage.setItem('listItems', JSON.stringify(newArr))
     }
     this.items = JSON.parse(sessionStorage.getItem('listItems'))
+  },
+  mounted () {
+    document.onreadystatechange = () => {
+      if (document.readyState === 'complete') {
+        this.isLoaded = true
+      }
+    }
   },
   methods: {
     add (obj) {

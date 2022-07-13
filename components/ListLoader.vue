@@ -1,24 +1,12 @@
 <template>
-  <div v-if="!isLoaded" class="wrapper-loader">
+  <div class="wrapper-loader">
     <div class="loader"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ListLoader',
-  data () {
-    return {
-      isLoaded: false
-    }
-  },
-  mounted () {
-    document.onreadystatechange = () => {
-      if (document.readyState === 'complete') {
-        this.isLoaded = true
-      }
-    }
-  }
+  name: 'ListLoader'
 }
 </script>
 
