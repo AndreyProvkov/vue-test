@@ -17,6 +17,11 @@ export default {
       items: []
     }
   },
+  watch: {
+    items () {
+      sessionStorage.setItem('listItems', JSON.stringify(this.items))
+    }
+  },
   created () {
     if (!sessionStorage.getItem('listItems')) {
       const newArr = []
@@ -44,16 +49,10 @@ export default {
         linkImg: obj.link,
         price: Number(obj.price.replace(/\s/g, ''))
       }
-      const sessionArr = JSON.parse(sessionStorage.getItem('listItems'))
-      sessionArr.unshift(item)
-      this.items = sessionArr
-      sessionStorage.setItem('listItems', JSON.stringify(sessionArr))
+      this.items.unshift(item)
     },
     deleteItem (id) {
-      let sessionArr = JSON.parse(sessionStorage.getItem('listItems'))
-      sessionArr = sessionArr.filter(item => item.id !== id)
-      this.items = sessionArr
-      sessionStorage.setItem('listItems', JSON.stringify(sessionArr))
+      this.items = this.items.filter(item => item.id !== id)
     }
   }
 }
