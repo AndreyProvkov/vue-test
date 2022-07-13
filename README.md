@@ -1,6 +1,10 @@
 # vuetest
 
+Development on node v16.16.0
+
 ## Build Setup
+
+Download or clone the repository on your local machine
 
 ```bash
 # install dependencies
