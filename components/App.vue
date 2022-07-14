@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-cloak>
     <ListLoader v-if="!isLoaded" />
     <HeaderPage @sort="sort($event)" />
     <AddFormItem @addItem="add" />
@@ -44,11 +44,20 @@ export default {
     this.items = JSON.parse(sessionStorage.getItem('listItems'))
   },
   mounted () {
+    if (document.readyState === 'complete') {
+      this.isLoaded = true
+    }
     document.onreadystatechange = () => {
       if (document.readyState === 'complete') {
         this.isLoaded = true
       }
     }
+  },
+  updated () {
+    this.$nextTick(() => {
+      console.log(this)
+      this.isLoaded = true
+    })
   },
   methods: {
     add (obj) {
