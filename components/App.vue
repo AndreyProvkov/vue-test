@@ -53,12 +53,6 @@ export default {
       }
     }
   },
-  updated () {
-    this.$nextTick(() => {
-      console.log(this)
-      this.isLoaded = true
-    })
-  },
   methods: {
     add (obj) {
       const item = {
