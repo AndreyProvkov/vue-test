@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-cloak>
+  <div class="container">
     <ListLoader v-if="!isLoaded" />
     <HeaderPage @sort="sort($event)" />
     <AddFormItem @addItem="add" />
