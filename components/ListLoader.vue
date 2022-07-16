@@ -12,7 +12,7 @@ export default {
 
 <style scoped lang="scss">
     .wrapper-loader {
-      position: fixed;
+      position: absolute;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -24,11 +24,11 @@ export default {
       z-index: 1;
     }
     .loader {
-      border: 1.3rem solid #c5c5c5;
-      border-top: 1.3rem solid #3F3F3F;
+      border: 0.7rem solid #c5c5c5;
+      border-top: 0.7rem solid #3F3F3F;
       border-radius: 50%;
-      width: 8rem;
-      height: 8rem;
+      width: 5rem;
+      height: 5rem;
       animation: spin 1.5s linear infinite;
     }
     @keyframes spin {

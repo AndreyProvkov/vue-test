@@ -1,7 +1,16 @@
 <template>
   <div class="item">
     <div class="item__image">
-      <img v-lazyload class="item__image-el" :data-src="item.linkImg" alt="image">
+      <ListLoader v-if="!imgLoaded" />
+      <img
+        v-lazyload
+        class="item__image-el"
+        :data-src="item.linkImg"
+        src="/"
+        alt="image"
+        @load="load"
+        @error="load"
+      >
     </div>
     <div class="item__description">
       <h2 class="item__title">
@@ -58,9 +67,17 @@ export default {
     item: Object
   },
   emits: ['deleteItem'],
+  data () {
+    return {
+      imgLoaded: false
+    }
+  },
   methods: {
     deleteItem (id) {
       this.$emit('deleteItem', id)
+    },
+    load () {
+      this.imgLoaded = true
     }
   }
 }
@@ -82,6 +99,7 @@ export default {
     flex-direction: column;
     align-self: stretch;
     &__image {
+      position: relative;
       margin-bottom: 1.6rem;
       overflow: hidden;
       border-top-left-radius: .4rem;

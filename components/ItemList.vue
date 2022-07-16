@@ -7,8 +7,6 @@
         :item="item"
         @deleteItem="deleteItem($event)"
       />
-      <div :key="'empty-space'" class="fill-empty-space" />
-      <div :key="'empty-space1'" class="fill-empty-space" />
     </transition-group>
   </section>
 </template>
@@ -29,26 +27,14 @@ export default {
 
 <style scoped lang='scss'>
   .list-item {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.6rem;
-  }
-  .fill-empty-space {
-    height: 0;
-    flex-basis: 32%;
-    @media screen and (max-width: 1068px) {
-      flex-basis: 31%;
-    }
-    @media screen and (max-width: 899px) {
-      flex-basis: 48%;
+    grid-gap: 1.6rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+    @media screen and (max-width: 944px) {
+      grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
     }
     @media screen and (max-width: 669px) {
-      flex-basis: 31%;
-    }
-    @media screen and (max-width: 534px) {
-      flex-basis: 48%;
+      grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
     }
   }
   .list-move,
